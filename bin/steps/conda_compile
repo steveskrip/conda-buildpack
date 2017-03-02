@@ -7,12 +7,13 @@ if [ ! -d /app/.heroku/miniconda ]; then
     rm -fr Miniconda3-latest-Linux-x86_64.sh
     
     conda update conda --quiet --yes | indent
+    conda install nomkl --yes | indent
 fi
 
 
 if [ -f conda-requirements.txt ]; then
     puts-step "Installing dependencies using Conda"
-    conda install --file conda-requirements.txt --yes
+    conda install --no-deps --file conda-requirements.txt --yes
 fi
 
 if [ -f environment.yml ]; then
